@@ -1,0 +1,9 @@
+{% extends request.user.is_authenticated|yesno:"buscador/base.html,buscador/base_visita.html" %}
+	{% block body %}
+		<div class="row">
+			<div class="col-sm-12">
+				<h3>Bienvenido a Kolb Weblib{% if request.user.is_authenticated %}, {{ user.username }} {% endif %}</h3>
+			</div>
+		</div>
+	{% endblock %}
+
