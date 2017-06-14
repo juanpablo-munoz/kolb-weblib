@@ -1,0 +1,46 @@
+{% extends 'crawlerapp/base.html' %}
+
+{% block body %}
+{% if error %}
+    <h4>{{error}}</h4>
+{% else %}
+    {% if nuevo_sitio_fuente %}
+        <h2>Resultados de la exploración de {{nuevo_sitio_fuente}}</h2>
+        <ul style="list-style-type:none">
+            {% for sitio in sitios_explorados %}
+                 <li>{{sitio}}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endif %}
+<br>
+{% if sitios_fuente %}
+    <h2>Sitios fuente explorados:</h2>
+    <ul style="list-style-type:none">
+        {% for sitio in sitios_fuente %}
+             <li>{{sitio.url}}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <h3>No hay sitios fuente explorados.</h3>
+{% endif %}
+<br>
+<form action="{% url 'crawlerapp:run_crawler' %}" method="post">
+    {% csrf_token %}
+    Ingrese una nueva URL desde la cual rescatar material Web:<br>
+    <input type="url" size="60" name="nuevo_sitio_fuente" placeholder="http://www.ejemplo.com/index.html"><br>
+    Elija el nivel de profundidad de la exploración a partir de la URL entregda (2 por defecto)<br>
+    Elija 1 para rescatar sólo la página contenida en la URL.<br>
+    <select name="depth">
+        <option value="1">1</option>
+        <option value="2" selected>2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </select>
+    <br><br>
+    <input type="submit"value="Comenzar">
+
+
+</form>
+{% endblock %}

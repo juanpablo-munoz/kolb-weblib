@@ -1,0 +1,17 @@
+{% extends 'browseapp/base.html' %}
+
+{% block body %}
+    {% if url_a_visitar %}
+        <iframe src={{url_a_visitar}} width="800" height="600" align="middle"></iframe>
+    {% endif %}
+    {% if todos_los_sitios %}
+        <h2>Explorar</h2>
+        <ul style="list-style-type:none">
+            {% for sitio in todos_los_sitios %}
+                 <li><a href="/../browse/=http://{{sitio.dominio}}{{sitio.url}}">{{sitio.titulo}}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h3>No hay sitios explorados.</h3>
+    {% endif %}
+{% endblock %}
