@@ -1,0 +1,36 @@
+{% extends 'usuarios/base_visita.html' %}
+{% block title %}Registro{% endblock %}
+{% block registro_activo %}active{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>Registrar una cuenta</h3>
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+                    <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <!--{% include 'usuarios/form_template.html' %}-->
+                        {{ form.as_p }}
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success">Enviar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="panel-footer">
+                    ¿Ya tienes una cuenta? <a href="{% url 'usuarios:login_usuario' %}">Haz click aquí</a> para iniciar sesión.
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
