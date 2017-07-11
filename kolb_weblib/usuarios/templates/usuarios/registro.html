@@ -1,36 +1,95 @@
 {% extends 'usuarios/base_visita.html' %}
+{% load widget_tweaks %}
 {% block title %}Registro{% endblock %}
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'usuarios/registro.css' %}"/>
 {% block registro_activo %}active{% endblock %}
 
 {% block body %}
-<div class="container-fluid">
 
+
+<div class="container" id="wrap">
     <div class="row">
-        <div class="col-sm-12 col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h3>Registrar una cuenta</h3>
-                    {% if error_message %}
+        <div class="col-md-6 col-md-offset-3">
+            <form action="" method="post" accept-charset="utf-8" class="form" role="form">
+                <h3>Registrarte</h3>
+                {% if error_message %}
                         <p><strong>{{ error_message }}</strong></p>
-                    {% endif %}
-                    <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <!--{% include 'usuarios/form_template.html' %}-->
-                        {{ form.as_p }}
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-success">Enviar</button>
-                            </div>
+                {% endif %}
+                <h4>¡Aprende mejor y más rápido!</h4>
+                {% csrf_token %}
+                <div class="form-group {%if form.username.errors %}has-error{%endif%}">
+                {{ form.username|add_class:"form-control input-lg"|attr:"placeholder:Tu nombre de usuario" }}
+                {% if form.username.errors %}
+                {% for error in form.username.errors %}
+                <div class="alert alert-danger">
+                    <strong>Error</strong> {{ error }}
+                </div>
+                {% endfor %}
+                {% endif %}
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 col-md-6 form-group {%if form.first_name.errors %}has-error{%endif%}">
+                        {{ form.first_name|add_class:"form-control input-lg"|attr:"placeholder:Tu Nombre" }}
+                        {% if form.first_name.errors %}
+                        {% for error in form.first_name.errors %}
+                        <div class="alert alert-danger">
+                            <strong>Error</strong> {{ error }}
                         </div>
-                    </form>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-6 col-md-6 form-group {%if form.last_name.errors %}has-error{%endif%}">
+                        {{ form.last_name|add_class:"form-control input-lg"|attr:"placeholder:Tu Apellido" }}
+                        {% if form.last_name.errors %}
+                        {% for error in form.last_name.errors %}
+                        <div class="alert alert-danger">
+                            <strong>Error</strong> {{ error }}
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
                 </div>
-                <div class="panel-footer">
-                    ¿Ya tienes una cuenta? <a href="{% url 'usuarios:login_usuario' %}">Haz click aquí</a> para iniciar sesión.
+                <div class="form-group {%if form.email.errors %}has-error{%endif%}">
+                    {{ form.email|add_class:"form-control input-lg"|attr:"placeholder:Tu email" }}
+                    {% if form.email.errors %}
+                    {% for error in form.email.errors %}
+                    <div class="alert alert-danger">
+                        <strong>Error</strong> {{ error }}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
                 </div>
+                <div class="form-group {%if form.password1.errors %}has-error{%endif%}">
+                    {{ form.password1|add_class:"form-control input-lg"|attr:"placeholder:Tu contraseña" }}
+                    {% if form.password1.errors %}
+                    {% for error in form.password1.errors %}
+                    <div class="alert alert-danger">
+                        <strong>Error</strong> {{ error }}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="form-group {%if form.password2.errors %}has-error{%endif%}">
+                    {{ form.password2|add_class:"form-control input-lg"|attr:"placeholder:Repite tu contraseña" }}
+                    {% if form.password2.errors %}
+                    {% for error in form.password2.errors %}
+                    <div class="alert alert-danger">
+                        <strong>Error</strong> {{ error }}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+                <button class="btn btn-lg btn-primary btn-block signup-btn" type="submit">
+                    Crear mi cuenta</button>
+            </form>
+            <div>
+                ¿Ya tienes una cuenta? <a href="{% url 'usuarios:login_usuario' %}">Haz click aquí</a> para iniciar sesión.
             </div>
-        </div>
-    </div>
 
+          </div>
+
+    </div>
 </div>
 
 {% endblock %}

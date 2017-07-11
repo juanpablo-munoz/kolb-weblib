@@ -10,9 +10,9 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <h3>Log In</h3>
-                    {% if error_message %}
-                        <p><strong>{{ error_message }}</strong></p>
-                    {% endif %}
+                    <!--{% if error_message %}-->
+                        <!--<p><strong>{{ error_message }}</strong></p>-->
+                    <!--{% endif %}-->
                     <form class="form-horizontal" role="form" action="{% url 'usuarios:login_usuario'%}" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="form-group">
