@@ -13,3 +13,16 @@ Integrantes:
 >Django>=1.10
 
 >BeautifulSoup=4.0
+
+# Ejecución
+
+```
+$ cd kolb-weblib
+$ python manage.py runserver
+```
+
+Para acceder a la cuenta de Administrador de la plataforma, usar las credenciales:
+
+> User: admin
+
+> Password: kolb2017 
