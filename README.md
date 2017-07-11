@@ -21,7 +21,7 @@ $ cd kolb-weblib
 $ python manage.py runserver
 ```
 
-Para acceder a la cuenta de Administrador de la plataforma, usar las credenciales:
+Para acceder a la cuenta de Administrador de la plataforma (localhost:8000/admin/), usar las credenciales:
 
 > User: admin
 
