@@ -1,0 +1,13 @@
+{% extends 'usuarios/base.html' %}
+{% block title %}Panel de Usuario{% endblock %}
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'usuarios/reglog.css' %}"/>
+{% block panel_activo %}active{% endblock %}
+
+{% block body %}
+
+Bienvenido a tu panel, {{ user.username|title }}
+
+
+
+{% endblock %}

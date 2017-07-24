@@ -1,8 +1,8 @@
-{% extends 'usuarios/base_visita.html' %}
+{% extends 'usuarios/base.html' %}
 {% load widget_tweaks %}
 {% block title %}Registro{% endblock %}
 {% load staticfiles %}
-<link rel="stylesheet" type="text/css" href="{% static 'usuarios/registro.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'usuarios/reglog.css' %}"/>
 {% block registro_activo %}active{% endblock %}
 
 {% block body %}
@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <form action="" method="post" accept-charset="utf-8" class="form" role="form">
-                <h3>Registrarte</h3>
+                <h3>Regístrate</h3>
                 {% if error_message %}
                         <p><strong>{{ error_message }}</strong></p>
                 {% endif %}
@@ -84,7 +84,7 @@
                     Crear mi cuenta</button>
             </form>
             <div>
-                ¿Ya tienes una cuenta? <a href="{% url 'usuarios:login_usuario' %}">Haz click aquí</a> para iniciar sesión.
+                ¿Ya tienes una cuenta? <a href="{% url 'usuarios:inicio' %}">Haz click aquí</a> para iniciar sesión.
             </div>
 
           </div>

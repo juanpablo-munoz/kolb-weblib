@@ -41,6 +41,10 @@ INSTALLED_APPS = [
     'widget_tweaks',
 ]
 
+from django.core.urlresolvers import reverse_lazy
+
+LOGOUT_URL = reverse_lazy('usuarios:cerrar')
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

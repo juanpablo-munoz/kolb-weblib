@@ -1,50 +1,42 @@
-{% extends 'usuarios/base_visita.html' %}
+{% extends 'usuarios/base.html' %}
 {% block title %}Inicia Sesión{% endblock %}
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'usuarios/reglog.css' %}"/>
 {% block login_activo %}active{% endblock %}
 
 {% block body %}
-<div class="container-fluid">
 
+<div class="container" id="wrap">
     <div class="row">
-        <div class="col-sm-12 col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h3>Log In</h3>
-                    <!--{% if error_message %}-->
-                        <!--<p><strong>{{ error_message }}</strong></p>-->
-                    <!--{% endif %}-->
-                    <form class="form-horizontal" role="form" action="{% url 'usuarios:login_usuario'%}" method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="id_username">
-                                Usuario:
-                            </label>
-                            <div class="col-sm-10">
-                                <input id="id_username" maxlength="30" name="username" type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="id_password">
-                                Contraseña:
-                            </label>
-                            <div class="col-sm-10">
-                                <input id="id_password" maxlength="30" name="password" type="password">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-success">Enviar</button>
-                            </div>
-                        </div>
-                    </form>
+        <div class="col-md-6 col-md-offset-3">
+            <form action="" method="post" accept-charset="utf-8" class="form" role="form">
+                <h3>Inicia Sesión</h3>
+                <h4>¡Aprende mejor y más rápido!</h4>
+                {% csrf_token %}
+                <div class="form-group {%if error_message %}has-error{%endif%}">
+                    <input type="text" name="username" value="" class="form-control input-lg"
+                           placeholder="Tu nombre de usuario"  />
                 </div>
-                <div class="panel-footer">
-                    ¿No tienes una cuenta? <a href="{% url 'usuarios:registro' %}">Haz click aquí.</a> para registrarte.
+                <div class="form-group {%if error_message %}has-error{%endif%}">
+                    <input type="password" name="password1" value="" class="form-control input-lg"
+                           placeholder="Tu contraseña"/>
+                {% if error_message %}
+                <div class="alert alert-danger">
+                    <strong>Error</strong> {{ error_message }}
                 </div>
+                {% endif %}
+                </div>
+                <button class="btn btn-lg btn-primary btn-block signup-btn" type="submit">
+                    Iniciar sesión</button>
+            </form>
+            <div>
+                ¿No tienes una cuenta? <a href="{% url 'usuarios:registro' %}">Haz click aquí.</a> para registrarte.
             </div>
-        </div>
-    </div>
 
+          </div>
+
+    </div>
 </div>
+
 
 {% endblock %}
