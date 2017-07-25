@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^login_usuario/$', views.login_usuario,  name='inicio'),
     url(r'^panel/$', views.panel,  name='panel'),
     url(r'^logout_usuario/$', logout, {'template_name': 'usuarios/index.html'}, name='cerrar'),
+    url(r'^edit/(?P<pk>[0-9]+)/$', views.edit_usuario.as_view(), name='editar'),
 ]

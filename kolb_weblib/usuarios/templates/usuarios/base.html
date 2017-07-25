@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" content="width=device-width, initial-scale=1">
     <title>{% block title %}Kolb Weblib{% endblock %}</title>
     {% load staticfiles %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -43,7 +43,7 @@
                 {% if request.user.is_authenticated %}
                 <li class="{% block panel_activo %}{% endblock %}">
                     <a href="{% url 'usuarios:panel' %}">
-                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>&nbsp; {{ user.username|title }}
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>&nbsp; {{ request.user.username|title }}
                     </a>
                 </li>
                 <li class="{% block logout_activo %}{% endblock %}">
