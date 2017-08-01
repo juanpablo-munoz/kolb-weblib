@@ -1,6 +1,6 @@
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from kolb_weblib.settings import USER_DIR
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect  # , get_object_or_404
 from .forms import RegistrationForm
 from django.contrib.auth.models import User
@@ -16,7 +16,9 @@ def index(request):
 def panel(request):
     if request.method == "POST":
         accion = request.POST['accion']
-        usuario = User.objects.get(username=request.POST['user_id'])
+        if 'user_id' in request.POST:
+            usuario = User.objects.get(username=request.POST.get('user_id'))
+        miembros = User.objects.all()
         if accion == "del":
             usuario.delete()
         elif accion == 'ban':
@@ -25,15 +27,23 @@ def panel(request):
         elif accion == 'unban':
             usuario.is_active = True
             usuario.save()
-        miembros = User.objects.all()
-        return render(request, 'usuarios/panel.html', {'miembros': miembros})
+        elif accion == 'con':
+            form = PasswordChangeForm(data=request.POST, user=request.user)
+            if form.is_valid():
+                form.save()
+                update_session_auth_hash(request, form.user)
+            else:
+                return render(request, 'usuarios/panel.html', {'miembros': miembros, 'form': form})
+        form = PasswordChangeForm(user=request.user)
+        return render(request, 'usuarios/panel.html', {'miembros': miembros, 'form': form})
     else:
         if request.user.is_authenticated:
             miembros = User.objects.all()
-            return render(request, 'usuarios/panel.html', {'miembros': miembros})
+            form = PasswordChangeForm(user=request.user)
+            return render(request, 'usuarios/panel.html', {'miembros': miembros, 'form':form})
         else:
             return render(request, 'usuarios/index.html')
-        
+
 
 
 

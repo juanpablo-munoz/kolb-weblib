@@ -1,10 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% load widget_tweaks %}
+<div class="container" id="wrap">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form action="" method="post" accept-charset="utf-8" class="form" role="form">
+                <h3>Cambiar Contraseña</h3>
+                {% csrf_token %}
+                <div class="form-group {% if form.old_password.errors %}has-error{% endif %}">
+                    {{ form.old_password|add_class:"form-control input-lg"|attr:"placeholder:Contraseña actual" }}
+                    {% if form.old_password.errors %}
+                    {% for error in form.old_password.errors %}
+                    <div class="alert alert-danger">
+                        <strong>Error</strong> {{ error }}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="form-group {% if form.new_password1.errors %}has-error{% endif %}">
+                    {{ form.new_password1|add_class:"form-control input-lg"|attr:"placeholder:Contraseña nueva" }}
+                    {% if form.new_password1.errors %}
+                    {% for error in form.new_password1.errors %}
+                    <div class="alert alert-danger">
+                        <strong>Error</strong> {{ error }}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="form-group {% if form.new_password2.errors %}has-error{% endif %}">
+                    {{ form.new_password2|add_class:"form-control input-lg"|attr:"placeholder:Repite contraseña nueva" }}
+                    {% if form.new_password2.errors %}
+                    {% for error in form.new_password2.errors %}
+                    <div class="alert alert-danger">
+                        <strong>Error</strong> {{ error }}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+                <input type="hidden" name="accion" value="con">
+                <button class="btn btn-lg btn-primary btn-block signup-btn" type="submit">
+                    Cambiar</button>
+            </form>
+          </div>
 
-</body>
-</html>
+    </div>
+</div>
