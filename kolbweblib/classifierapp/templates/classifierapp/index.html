@@ -1,0 +1,125 @@
+{% extends '../kolbweblib/base.html' %}
+
+{% block body %}
+{% if clasificador_no_existe %}
+    <h4><p class="bg-warning">No existe ningún modelo clasificador de documentos aún. Debe crear uno a continuación.</p></h4>
+    {% if error %}
+      <p class="bg-danger">Error: {{error}}</p>
+    {% endif %}
+    <form action="{% url 'classifierapp:create_classifier' %}" method="post">
+      {% csrf_token %}
+      <div class="row_fluid">
+        <div class="span4 offset4 text-center">
+          <p>Cantidad de neuronas de las capas 1 y 2 (recomendado 15 a 300 para estabilidad de rendimiento)</p>
+          <p>Capa 1</p>
+          <select name="num_neuronas_1">
+              <option value="15" selected>15</option>
+              <option value="30">30</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+              <option value="150">150</option>
+              <option value="200">200</option>
+              <option value="250">250</option>
+              <option value="300">300</option>
+          </select>
+          <br>
+          <p>Capa 2</p>
+          <select name="num_neuronas_2">
+              <option value="15" selected>15</option>
+              <option value="30">30</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+              <option value="150">150</option>
+              <option value="200">200</option>
+              <option value="250">250</option>
+              <option value="300">300</option>
+          </select>
+          <br>
+          <br>
+          <input type="submit" class="btn btn-primary btn-lg" value="Crear Clasificador">
+        </div>
+      </div>
+   </form>
+{% else %}
+  {% if clasificador_recien_creado %}
+    <h5><p class="bg-success">Clasificador nuevo cargado. Antes de empezar a entrenarlo,
+      debe clasificar manualmente la mayor cantidad de documentos Web
+      registrados en el sistema.</p></h5>
+  {% else %}
+    <form action="{% url 'classifierapp:train_classifier' %}" method="post">
+      {% csrf_token %}
+      <div class="row_fluid">
+        <div class="span4 offset4 text-center">
+          <p>Es posible entrenar el clasificador</p>
+          <input type="submit" class="btn btn-success btn-lg" value="Entrenar Clasificador">
+        </div>
+      </div>
+    </form>
+    <br>
+    <br>
+    <form action="{% url 'classifierapp:delete_classifier' %}" method="post">
+      {% csrf_token %}
+      <div class="row_fluid">
+        <div class="span4 offset4 text-center">
+          <input type="submit" class="btn btn-danger btn-xs" value="Descartar Clasificador">
+        </div>
+      </div>
+    </form>
+  {% endif %}
+  {% if resultados %}
+  <div class="row_fluid">
+    <div class="span4 offset4 text-center">
+      <p>Porcentaje de aciertos del clasificador al entrenar: {{resultados}}%</p>
+    </div>
+  </div>
+  {% endif %}
+{% endif %}
+<br>
+{% if sitios_fuente %}
+    <h2>Clasificación de documentos Web explorados</h2>
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Dominio</th>
+            <th>URL</th>
+            <th>Título</th>
+            <th class="text-right">Clasificación actual</th>
+            <th class="text-right">Nueva clasificación</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for sitio in sitios_fuente %}
+            <tr>
+               <td>{{sitio.dominio}}</td>
+               <td>{{sitio.url}}</td>
+               <td>{{sitio.titulo}}</td>
+               {% if not sitio.tipo_aprendizaje %}
+                <td class="text-right">(Sin clasif.)</td>
+               {% else %}
+                <td class="text-right">{{sitio.tipo_aprendizaje}}</td>
+               {% endif %}
+               <td class="text-right">
+                <form action="{% url 'classifierapp:manual_classification' %}" method="post">
+                 {% csrf_token %}                   
+                 <input type="submit" name={{sitio.url}} class="btn btn-primary btn-xs" value="div">
+                 <input type="submit" name={{sitio.url}} class="btn btn-success btn-xs" value="aco">
+                 <input type="submit" name={{sitio.url}} class="btn btn-warning btn-xs" value="con">
+                 <input type="submit" name={{sitio.url}} class="btn btn-danger btn-xs" value="asi">                                    
+               </form>
+               <form action="{% url 'classifierapp:automatic_classification' %}" method="post">
+                 {% csrf_token %} 
+                 <input type="submit" name={{sitio.url}} class="btn btn-default btn-xs" value="Autom.">
+               </form>
+              </td>
+             </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+{% else %}
+    <h3>No hay sitios fuente explorados.</h3>
+{% endif %}
+<br>
+
+{% endblock %}
