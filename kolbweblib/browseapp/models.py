@@ -18,10 +18,7 @@ class MaterialWebProcesado(models.Model):
 
     def __str__(self):
         return self.titulo
-
-    def __repr__(self):
-        return '<MaterialWebProcesado: %s -- %s>' % (self.titulo, truncatewords_html(self.contenido, 10))
-
+    
     def __unicode__(self):
         return force_text(self.__repr__())
 

@@ -1,4 +1,4 @@
-{% extends 'crawlerapp/base.html' %}
+{% extends '../kolbweblib/base.html' %}
 
 {% block body %}
 {% if error %}
@@ -28,7 +28,7 @@
 <form action="{% url 'crawlerapp:run_crawler' %}" method="post">
     {% csrf_token %}
     Ingrese una nueva URL desde la cual rescatar material Web:<br>
-    <input type="url" size="60" name="nuevo_sitio_fuente" placeholder="http://www.ejemplo.com/index.html"><br>
+    <input type="url" required size="60" name="nuevo_sitio_fuente" placeholder="http://www.ejemplo.com/index.html"><br>
     Elija el nivel de profundidad de la exploración a partir de la URL entregda (2 por defecto)<br>
     Elija 1 para rescatar sólo la página contenida en la URL.<br>
     <select name="depth">

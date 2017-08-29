@@ -2,14 +2,14 @@
 # filename: crawler.py
 
 #import sqlite3
-import urllib.request, urllib.error, urllib.parse  
-from html.parser import HTMLParser  
+import urllib.request, urllib.error, urllib.parse
+from html.parser import HTMLParser
 from urllib.parse import urlparse
 from bs4 import BeautifulSoup
 
 from browseapp.models import MaterialWebProcesado
 
-class HREFParser(HTMLParser):  
+class HREFParser(HTMLParser):
     """
     Parser that extracts hrefs
     """
@@ -21,7 +21,7 @@ class HREFParser(HTMLParser):
                 self.hrefs.add(dict_attrs['href'])
 
 
-def get_local_links(html, domain, current_path):  
+def get_local_links(html, domain, current_path):
     """
     Read through HTML content and returns a tuple of links
     internal to the given domain
@@ -88,7 +88,7 @@ class CrawlerCache(object):
         return [row[0] for row in q]
 
 
-class Crawler(object):  
+class Crawler(object):
     def __init__(self, cache=None, depth=2):
         """
         depth: how many time it will bounce from page one (optional)
@@ -155,8 +155,6 @@ class Crawler(object):
             print("Explorando URL: [%s] %s" % (self.domain, url))
             req = urllib.request.Request('%s://%s%s' % (self.scheme, self.domain, url))
             response = urllib.request.urlopen(req)
-            #if len(response.read().decode('ascii', 'ignore'))==0:
-            #    return ''
             return response.read().decode('ascii', 'ignore')
         except urllib.error.HTTPError as e:
             print("error [%s] %s: %s" % (self.domain, url, e))

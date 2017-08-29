@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'crawlerapp.apps.CrawlerappConfig',
     'testapp.apps.TestappConfig',
     'browseapp',
-    #'haystack',              #capa de abstraccion para implementacion mas sencilla de elasticsearch
+    'classifierapp'
 ]
 
 SITE_ID = 1
