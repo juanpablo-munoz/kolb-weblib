@@ -22,7 +22,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand " href="{% url 'usuarios:index' %}">Kolb Weblib</a>
+            <a class="navbar-brand " href="{% url 'home' %}">Kolb Weblib</a>
         </div>
 
         <!-- Items -->
@@ -41,11 +41,6 @@
                 </li>
                 {% endif %}
                 {% if request.user.is_authenticated %}
-                <li class="{% block buscar_activo %}{% endblock %}">
-                    <a href="{% url 'browseapp:browse_index' %}">
-                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>&nbsp; Buscar
-                    </a>
-                </li>
                 <li class="{% block panel_activo %}{% endblock %}">
                     <a href="{% url 'usuarios:panel' %}">
                         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>&nbsp; {{ request.user.username|title }}

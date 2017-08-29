@@ -1,0 +1,3 @@
+{{ object.titulo }}
+{{ object.dominio }}
+{{ object.contenido }}
