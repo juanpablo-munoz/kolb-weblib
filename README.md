@@ -8,8 +8,10 @@ Integrantes:
 
 # Dependencias a la fecha
 
+Entorno de trabajo con:
 >Python>=3.5
->
+
+Librerías de Python requeridas:
 >Django>=1.10
 >
 >BeautifulSoup=4.0
