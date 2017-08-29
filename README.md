@@ -13,6 +13,12 @@ Integrantes:
 >Django>=1.10
 >
 >BeautifulSoup=4.0
+>
+>Keras>=1.0.0
+>
+>sklearn>=1.9.0
+>
+>nltk>=3.0.0
 
 # Ejecución
 
