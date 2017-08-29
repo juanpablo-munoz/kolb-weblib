@@ -10,6 +10,10 @@ Integrantes:
 
 Entorno de trabajo con:
 >Python>=3.5
+>
+>python-dev
+>
+>python3-dev
 
 Librerías de Python requeridas:
 >Django>=1.10
