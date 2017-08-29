@@ -16,7 +16,9 @@ Integrantes:
 >
 >Keras>=1.0.0
 >
->sklearn>=1.9.0
+>Theano>=0.9.0
+>
+>sklearn>=0.19.0
 >
 >nltk>=3.0.0
 
