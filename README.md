@@ -16,6 +16,8 @@ Integrantes:
 >
 >Keras>=1.0.0
 >
+>h5py>=2.7.0
+>
 >Theano>=0.9.0
 >
 >sklearn>=0.19.0
